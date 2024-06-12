@@ -1,5 +1,5 @@
 import streamlit as st
-from transformers import BertTokenizer, BertModel, GPT2LMHeadModel, GPT2Tokenizer
+from transformers import BertTokenizerFast, BertModel, GPT2LMHeadModel, GPT2Tokenizer
 import torch
 
 @st.cache_resource
