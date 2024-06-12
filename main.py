@@ -10,10 +10,10 @@ def load_model():
 
 # Initialize the GPT-2 model and tokenizer for generation
 @st.cache_resource
-gpt2_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-
-@st.cache_resource
-gpt2_model = GPT2LMHeadModel.from_pretrained('gpt2')
+def load_model_gpt():
+    gpt2_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+    gpt2_model = GPT2LMHeadModel.from_pretrained('gpt2')
+return model, tokenizer
 
 def retrieve_documents(query, documents, top_k=3):
     # Tokenize the query
