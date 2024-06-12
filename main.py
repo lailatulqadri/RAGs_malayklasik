@@ -13,7 +13,7 @@ def load_model():
 def load_model_gpt():
     gpt2_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
     gpt2_model = GPT2LMHeadModel.from_pretrained('gpt2')
-return model, tokenizer
+    return model, tokenizer
 
 def retrieve_documents(query, documents, top_k=3):
     # Tokenize the query
