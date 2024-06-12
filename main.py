@@ -5,7 +5,7 @@ import torch
 @st.cache_resource
 def load_model():
     bert_model = BertModel.from_pretrained('bert-base-uncased')
-    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+    bert_tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
     return bert_model, bert_tokenizer
 
 # Initialize the GPT-2 model and tokenizer for generation
