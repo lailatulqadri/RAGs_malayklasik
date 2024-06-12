@@ -3,7 +3,6 @@ from transformers import BertTokenizer, BertModel, GPT2LMHeadModel, GPT2Tokenize
 import torch
 
 # Initialize the BERT model and tokenizer for retrieval
-@st.cache_resource
 bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 
 @st.cache_resource
