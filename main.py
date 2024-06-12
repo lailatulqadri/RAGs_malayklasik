@@ -2,11 +2,11 @@ import streamlit as st
 from transformers import BertTokenizer, BertModel, GPT2LMHeadModel, GPT2Tokenizer
 import torch
 
-# Initialize the BERT model and tokenizer for retrieval
-bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
-
 @st.cache_resource
-bert_model = BertModel.from_pretrained('bert-base-uncased')
+def load_model():
+    model = BertModel.from_pretrained('bert-base-uncased')
+    tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
+    return model, tokenizer
 
 # Initialize the GPT-2 model and tokenizer for generation
 @st.cache_resource
