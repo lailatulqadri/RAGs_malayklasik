@@ -10,7 +10,10 @@ bert_tokenizer = BertTokenizer.from_pretrained('bert-base-uncased')
 bert_model = BertModel.from_pretrained('bert-base-uncased')
 
 # Initialize the GPT-2 model and tokenizer for generation
+@st.cache_resource
 gpt2_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+
+@st.cache_resource
 gpt2_model = GPT2LMHeadModel.from_pretrained('gpt2')
 
 def retrieve_documents(query, documents, top_k=3):
