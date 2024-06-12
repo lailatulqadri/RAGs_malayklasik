@@ -15,16 +15,19 @@ def load_model_gpt():
     gpt2_model = GPT2LMHeadModel.from_pretrained('gpt2')
     return model, tokenizer
 
+model_bert, tokenizer_bert = load_model()
+model_gpt, tokenizer_gpt= load_model_gpt()
+
 def retrieve_documents(query, documents, top_k=3):
     # Tokenize the query
-    inputs = bert_tokenizer(query, return_tensors='pt')
-    query_embedding = bert_model(**inputs).last_hidden_state.mean(dim=1)
+    inputs = tokenizer_bert(query, return_tensors='pt')
+    query_embedding = model_bert(**inputs).last_hidden_state.mean(dim=1)
     
     # Retrieve top-k documents based on cosine similarity
     scores = []
     for doc in documents:
-        inputs = bert_tokenizer(doc, return_tensors='pt')
-        doc_embedding = bert_model(**inputs).last_hidden_state.mean(dim=1)
+        inputs = tokenizer_bert(doc, return_tensors='pt')
+        doc_embedding = model_bert(**inputs).last_hidden_state.mean(dim=1)
         score = torch.nn.functional.cosine_similarity(query_embedding, doc_embedding)
         scores.append(score.item())
     
@@ -40,11 +43,11 @@ def generate_answer(query, documents):
     
     # Combine the query and context for generation
     input_text = f"Context: {context}\n\nQuestion: {query}\nAnswer:"
-    inputs = gpt2_tokenizer(input_text, return_tensors='pt')
+    inputs = tokenizer_gpt(input_text, return_tensors='pt')
     
     # Generate the answer
-    outputs = gpt2_model.generate(inputs.input_ids, max_length=200, num_return_sequences=1)
-    answer = gpt2_tokenizer.decode(outputs[0], skip_special_tokens=True)
+    outputs = model_gpt.generate(inputs.input_ids, max_length=200, num_return_sequences=1)
+    answer = tokenizer_gpt.decode(outputs[0], skip_special_tokens=True)
     
     return answer
 
