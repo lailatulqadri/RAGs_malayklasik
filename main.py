@@ -4,16 +4,16 @@ import torch
 
 @st.cache_resource
 def load_model():
-    model = BertModel.from_pretrained('bert-base-uncased')
+    bert_model = BertModel.from_pretrained('bert-base-uncased')
     tokenizer = BertTokenizerFast.from_pretrained('bert-base-uncased')
-    return model, tokenizer
+    return bert_model, bert_tokenizer
 
 # Initialize the GPT-2 model and tokenizer for generation
 @st.cache_resource
 def load_model_gpt():
-    gpt2_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
-    gpt2_model = GPT2LMHeadModel.from_pretrained('gpt2')
-    return model, tokenizer
+    gpt_tokenizer = GPT2Tokenizer.from_pretrained('gpt2')
+    gpt_model = GPT2LMHeadModel.from_pretrained('gpt2')
+    return gpt_model, gpt_tokenizer
 
 model_bert, tokenizer_bert = load_model()
 model_gpt, tokenizer_gpt= load_model_gpt()
